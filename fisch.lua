@@ -27,34 +27,43 @@ GuiService = game:GetService("GuiService")
 print("ClientMonsterTools.lua loaded")
 
 --<>----<>----<>----< Anti Afk >----<>----<>----<>--
-game.Players.LocalPlayer.Idled:Connect(function()
-    VirtualUser:CaptureController()
-    VirtualUser:ClickButton2(Vector2.new())
-    print("Roblox Tried to kick you but we didn't let them kick you :D")
-end)
-warn("[Anti Afk] - loaded successfully") 
+game.Players.LocalPlayer.Idled:Connect(
+    function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+        print("Roblox Tried to kick you but we didn't let them kick you :D")
+    end
+)
+warn("[Anti Afk] - loaded successfully")
 
 ------library
 local Library = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local SaveManager =
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager =
+    loadstring(
+    game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua")
+)()
 
-local Window = Fluent:CreateWindow({
-    Title = "awdawdsawdsawd v.9157",
-    SubTitle = "by k4zmm_",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 460),
-    Acrylic = false,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
-})
+local Window =
+    Fluent:CreateWindow(
+    {
+        Title = "awdawdsawdsawd v.9157",
+        SubTitle = "by k4zmm_",
+        TabWidth = 160,
+        Size = UDim2.fromOffset(580, 460),
+        Acrylic = false,
+        Theme = "Dark",
+        MinimizeKey = Enum.KeyCode.LeftControl
+    }
+)
 
 local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "home" }),
-    Teleports = Window:AddTab({ Title = "Teleports", Icon = "compass" }),
-    Misc = Window:AddTab({ Title = "Misc", Icon = "file-text" }),
-    Webhook = Window:AddTab({ Title = "Webhook", Icon = "clock" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
+    Main = Window:AddTab({Title = "Main", Icon = "home"}),
+    Teleports = Window:AddTab({Title = "Teleports", Icon = "compass"}),
+    Misc = Window:AddTab({Title = "Misc", Icon = "file-text"}),
+    Webhook = Window:AddTab({Title = "Webhook", Icon = "clock"}),
+    Settings = Window:AddTab({Title = "Settings", Icon = "settings"})
 }
 
 local Options = Fluent.Options
@@ -63,9 +72,48 @@ local teleportSpots = {
     altar = CFrame.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
     arch = CFrame.new(998.966796875, 126.6849365234375, -1237.1434326171875),
     birch = CFrame.new(1742.3203125, 138.25787353515625, -2502.23779296875),
-    brine = CFrame.new(-1794.10596, -145.849701, -3302.92358, -5.16176224e-05, 3.10316682e-06, 0.99999994, 0.119907647, 0.992785037, 3.10316682e-06, -0.992785037, 0.119907647, -5.16176224e-05),
-    deep = CFrame.new(-1510.88672, -237.695053, -2852.90674, 0.573604643, 0.000580655003, 0.81913209, -0.000340352941, 0.999999762, -0.000470530824, -0.819132209, -8.89541116e-06, 0.573604763),
-    deepshop = CFrame.new(-979.196411, -247.910156, -2699.87207, 0.587748766, 0, 0.809043527, 0, 1, 0, -0.809043527, 0, 0.587748766),
+    brine = CFrame.new(
+        -1794.10596,
+        -145.849701,
+        -3302.92358,
+        -5.16176224e-05,
+        3.10316682e-06,
+        0.99999994,
+        0.119907647,
+        0.992785037,
+        3.10316682e-06,
+        -0.992785037,
+        0.119907647,
+        -5.16176224e-05
+    ),
+    deep = CFrame.new(
+        -1510.88672,
+        -237.695053,
+        -2852.90674,
+        0.573604643,
+        0.000580655003,
+        0.81913209,
+        -0.000340352941,
+        0.999999762,
+        -0.000470530824,
+        -0.819132209,
+        -8.89541116e-06,
+        0.573604763
+    ),
+    deepshop = CFrame.new(
+        -979.196411,
+        -247.910156,
+        -2699.87207,
+        0.587748766,
+        0,
+        0.809043527,
+        0,
+        1,
+        0,
+        -0.809043527,
+        0,
+        0.587748766
+    ),
     enchant = CFrame.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
     executive = CFrame.new(-29.836761474609375, -250.48486328125, 199.11614990234375),
     keepers = CFrame.new(1296.320068359375, -808.5519409179688, -298.93817138671875),
@@ -77,16 +125,82 @@ local teleportSpots = {
     snowcap = CFrame.new(2648.67578125, 139.06605529785156, 2521.29736328125),
     spike = CFrame.new(-1254.800537109375, 133.88555908203125, 1554.2021484375),
     statue = CFrame.new(72.8836669921875, 138.6964874267578, -1028.4193115234375),
-    sunstone = CFrame.new(-933.259705, 128.143951, -1119.52063, -0.342042685, 0, -0.939684391, 0, 1, 0, 0.939684391, 0, -0.342042685),
+    sunstone = CFrame.new(
+        -933.259705,
+        128.143951,
+        -1119.52063,
+        -0.342042685,
+        0,
+        -0.939684391,
+        0,
+        1,
+        0,
+        0.939684391,
+        0,
+        -0.342042685
+    ),
     swamp = CFrame.new(2501.48583984375, 127.7583236694336, -720.699462890625),
     terrapin = CFrame.new(-143.875244140625, 141.1676025390625, 1909.6070556640625),
-    trident = CFrame.new(-1479.48987, -228.710632, -2391.39307, 0.0435845852, 0, 0.999049723, 0, 1, 0, -0.999049723, 0, 0.0435845852),
+    trident = CFrame.new(
+        -1479.48987,
+        -228.710632,
+        -2391.39307,
+        0.0435845852,
+        0,
+        0.999049723,
+        0,
+        1,
+        0,
+        -0.999049723,
+        0,
+        0.0435845852
+    ),
     vertigo = CFrame.new(-112.007278, -492.901093, 1040.32788, -1, 0, 0, 0, 1, 0, 0, 0, -1),
     volcano = CFrame.new(-1888.52319, 163.847565, 329.238281, 1, 0, 0, 0, 1, 0, 0, 0, 1),
-    wilson = CFrame.new(2938.80591, 277.474762, 2567.13379, 0.4648332, 0, 0.885398269, 0, 1, 0, -0.885398269, 0, 0.4648332),
-    wilsons_rod = CFrame.new(2879.2085, 135.07663, 2723.64233, 0.970463336, -0.168695927, -0.172460333, 0.141582936, -0.180552125, 0.973321974, -0.195333466, -0.968990743, -0.151334763),
-    The_Depths = CFrame.new(1294.50, -701.38, 1599.49),
-    Forsaken = CFrame.new(-2509.66, 135.71, 1572.59),
+    wilson = CFrame.new(
+        2938.80591,
+        277.474762,
+        2567.13379,
+        0.4648332,
+        0,
+        0.885398269,
+        0,
+        1,
+        0,
+        -0.885398269,
+        0,
+        0.4648332
+    ),
+    wilsons_rod = CFrame.new(
+        2879.2085,
+        135.07663,
+        2723.64233,
+        0.970463336,
+        -0.168695927,
+        -0.172460333,
+        0.141582936,
+        -0.180552125,
+        0.973321974,
+        -0.195333466,
+        -0.968990743,
+        -0.151334763
+    ),
+    the_depths = CFrame.new(1294.50, -701.38, 1599.49),
+    forsaken = CFrame.new(-2509.66, 135.71, 1572.59),
+    Bestfarmingexp = CFrame.new(
+        -2694.06152,
+        164.750015,
+        1731.41968,
+        -0.959716678,
+        2.04554205e-08,
+        0.28096953,
+        -3.12619819e-09,
+        1,
+        -8.34812397e-08,
+        -0.28096953,
+        -8.09967062e-08,
+        -0.959716678
+    )
 }
 --[[local FishAreas = {
     Roslit_Bay = CFrame.new(-1663.73889, 149.234116, 495.498016, 0.0380855016, 4.08820178e-08, -0.999274492, 5.74658472e-08, 1, 4.3101906e-08, 0.999274492, -5.90657123e-08, 0.0380855016),
@@ -165,7 +279,6 @@ local teleportSpots = {
     Fish_Radar = CFrame.new(365.75177, 134.50499, 274.105804, 0.704499543, -0.111681774, -0.70086211, 1.32396817e-05, 0.987542748, -0.157350808, 0.709704578, 0.110844307, 0.695724905),
     Rod_Of_The_Depths = CFrame.new(1704.92, -902.53, 1442.00)
 }]]
-
 -- Locals
 local LocalPlayer = Players.LocalPlayer
 local LocalCharacter = LocalPlayer.Character
@@ -194,240 +307,295 @@ local AutoAppraiser = false
 local Keybind = Enum.KeyCode.F
 
 -- Script
-PlayerGUI.ChildAdded:Connect(function(GUI)
-    if GUI:IsA("ScreenGui") then
-        if GUI.Name == "reel" and autoReel then
-            local reelfinishedEvent = ReplicatedStorage:WaitForChild("events"):WaitForChild("reelfinished")
-            if reelfinishedEvent then
-                while GUI do
-                    task.wait(2)
-                    reelfinishedEvent:FireServer(100, false)
+PlayerGUI.ChildAdded:Connect(
+    function(GUI)
+        if GUI:IsA("ScreenGui") then
+            if GUI.Name == "reel" and autoReel then
+                local reelfinishedEvent = ReplicatedStorage:WaitForChild("events"):WaitForChild("reelfinished")
+                if reelfinishedEvent then
+                    while GUI do
+                        task.wait(2)
+                        reelfinishedEvent:FireServer(100, false)
+                    end
                 end
             end
         end
     end
-end)
+)
 function AutoFish5()
     if autoShake3 then
-        task.spawn(function()
-            while AutoFish do
-                local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-                local shakeUI = PlayerGUI:FindFirstChild("shakeui")
-                if shakeUI and shakeUI.Enabled then
-                    local safezone = shakeUI:FindFirstChild("safezone")
-                    if safezone then
-                        local button = safezone:FindFirstChild("button")
-                        if button and button:IsA("ImageButton") and button.Visible then
-                            if autoShake then
-                                local pos = button.AbsolutePosition
-                                local size = button.AbsoluteSize
-                                VirtualInputManager:SendMouseButtonEvent(pos.X + size.X / 2, pos.Y + size.Y / 2, 0, true, game:GetService("Players").LocalPlayer, 0)
-                                VirtualInputManager:SendMouseButtonEvent(pos.X + size.X / 2, pos.Y + size.Y / 2, 0, false, game:GetService("Players").LocalPlayer, 0)
-                            elseif autoShake2 then
-                                GuiService.SelectedObject = button
-                                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
-                                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+        task.spawn(
+            function()
+                while AutoFish do
+                    local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+                    local shakeUI = PlayerGUI:FindFirstChild("shakeui")
+                    if shakeUI and shakeUI.Enabled then
+                        local safezone = shakeUI:FindFirstChild("safezone")
+                        if safezone then
+                            local button = safezone:FindFirstChild("button")
+                            if button and button:IsA("ImageButton") and button.Visible then
+                                if autoShake then
+                                    local pos = button.AbsolutePosition
+                                    local size = button.AbsoluteSize
+                                    VirtualInputManager:SendMouseButtonEvent(
+                                        pos.X + size.X / 2,
+                                        pos.Y + size.Y / 2,
+                                        0,
+                                        true,
+                                        game:GetService("Players").LocalPlayer,
+                                        0
+                                    )
+                                    VirtualInputManager:SendMouseButtonEvent(
+                                        pos.X + size.X / 2,
+                                        pos.Y + size.Y / 2,
+                                        0,
+                                        false,
+                                        game:GetService("Players").LocalPlayer,
+                                        0
+                                    )
+                                elseif autoShake2 then
+                                    GuiService.SelectedObject = button
+                                    VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+                                    VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+                                end
                             end
                         end
                     end
+                    task.wait()
                 end
-                task.wait()
             end
-        end)
+        )
     else
-        task.spawn(function()
-            while AutoFish do
-                task.wait(autoShakeDelay)
-                local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-                local shakeUI = PlayerGUI:FindFirstChild("shakeui")
-                if shakeUI and shakeUI.Enabled then
-                    local safezone = shakeUI:FindFirstChild("safezone")
-                    if safezone then
-                        local button = safezone:FindFirstChild("button")
-                        if button and button:IsA("ImageButton") and button.Visible then
-                            if autoShake then
-                                local pos = button.AbsolutePosition
-                                local size = button.AbsoluteSize
-                                VirtualInputManager:SendMouseButtonEvent(pos.X + size.X / 2, pos.Y + size.Y / 2, 0, true, game:GetService("Players").LocalPlayer, 0)
-                                VirtualInputManager:SendMouseButtonEvent(pos.X + size.X / 2, pos.Y + size.Y / 2, 0, false, game:GetService("Players").LocalPlayer, 0)
-                            elseif autoShake2 then
-                                GuiService.SelectedObject = button
-                                VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
-                                VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+        task.spawn(
+            function()
+                while AutoFish do
+                    task.wait(autoShakeDelay)
+                    local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+                    local shakeUI = PlayerGUI:FindFirstChild("shakeui")
+                    if shakeUI and shakeUI.Enabled then
+                        local safezone = shakeUI:FindFirstChild("safezone")
+                        if safezone then
+                            local button = safezone:FindFirstChild("button")
+                            if button and button:IsA("ImageButton") and button.Visible then
+                                if autoShake then
+                                    local pos = button.AbsolutePosition
+                                    local size = button.AbsoluteSize
+                                    VirtualInputManager:SendMouseButtonEvent(
+                                        pos.X + size.X / 2,
+                                        pos.Y + size.Y / 2,
+                                        0,
+                                        true,
+                                        game:GetService("Players").LocalPlayer,
+                                        0
+                                    )
+                                    VirtualInputManager:SendMouseButtonEvent(
+                                        pos.X + size.X / 2,
+                                        pos.Y + size.Y / 2,
+                                        0,
+                                        false,
+                                        game:GetService("Players").LocalPlayer,
+                                        0
+                                    )
+                                elseif autoShake2 then
+                                    GuiService.SelectedObject = button
+                                    VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+                                    VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+                                end
                             end
                         end
                     end
                 end
             end
-        end)
+        )
     end
 end
 function AntiAfk2()
-    spawn(function()
-        while AntiAfk do
-            game:GetService("ReplicatedStorage"):WaitForChild("events"):WaitForChild("afk"):FireServer(false)
-            task.wait(0.01)
+    spawn(
+        function()
+            while AntiAfk do
+                game:GetService("ReplicatedStorage"):WaitForChild("events"):WaitForChild("afk"):FireServer(false)
+                task.wait(0.01)
+            end
         end
-    end)
+    )
 end
 function Pidoras()
-    spawn(function()
-        while AutoCast do
-            local player = game.Players.LocalPlayer
-            local character = player.Character
+    spawn(
+        function()
+            while AutoCast do
+                local player = game.Players.LocalPlayer
+                local character = player.Character
 
-            if character then
-                local tool = character:FindFirstChildOfClass("Tool")
+                if character then
+                    local tool = character:FindFirstChildOfClass("Tool")
 
-                if tool then
-                    local hasBobber = tool:FindFirstChild("bobber")
+                    if tool then
+                        local hasBobber = tool:FindFirstChild("bobber")
 
-                    if not hasBobber then
-                        local castEvent = tool:FindFirstChild("events") and tool.events:FindFirstChild("cast")
+                        if not hasBobber then
+                            local castEvent = tool:FindFirstChild("events") and tool.events:FindFirstChild("cast")
 
-                        if castEvent then
-                            local Random = math.random() * (99 - 90) + 90
-                            local FRandom = string.format("%.4f", Random)
-                            print(FRandom)
-                            
-                            local Random2 = math.random(90, 99)
-                            castEvent:FireServer(Random2)
+                            if castEvent then
+                                local Random = math.random() * (99 - 90) + 90
+                                local FRandom = string.format("%.4f", Random)
+                                print(FRandom)
 
-                            local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-                            if humanoidRootPart then
-                                humanoidRootPart.Anchored = false
+                                local Random2 = math.random(90, 99)
+                                castEvent:FireServer(Random2)
+
+                                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                                if humanoidRootPart then
+                                    humanoidRootPart.Anchored = false
+                                end
                             end
                         end
                     end
+                    task.wait(1)
                 end
-                task.wait(1)
             end
         end
-    end)
+    )
 end
-NoclipConnection = RunService.Stepped:Connect(function()
-    if Noclip == true then
-        if LocalCharacter ~= nil then
-            for i, v in pairs(LocalCharacter:GetDescendants()) do
-                if v:IsA("BasePart") and v.CanCollide == true then
-                    v.CanCollide = false
+NoclipConnection =
+    RunService.Stepped:Connect(
+    function()
+        if Noclip == true then
+            if LocalCharacter ~= nil then
+                for i, v in pairs(LocalCharacter:GetDescendants()) do
+                    if v:IsA("BasePart") and v.CanCollide == true then
+                        v.CanCollide = false
+                    end
                 end
             end
         end
     end
-end)
+)
 local initialPosition
 function rememberPosition()
-    spawn(function()
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local humanoid = character:FindFirstChildOfClass("Humanoid")
-        local rootPart = character:WaitForChild("HumanoidRootPart")
- 
-        local initialCFrame = rootPart.CFrame
- 
-        local bodyVelocity = Instance.new("BodyVelocity")
-        bodyVelocity.Velocity = Vector3.new(0, 0, 0)
-        bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-        bodyVelocity.Parent = rootPart
- 
-        local bodyGyro = Instance.new("BodyGyro")
-        bodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-        bodyGyro.D = 100
-        bodyGyro.P = 10000
-        bodyGyro.CFrame = initialCFrame
-        bodyGyro.Parent = rootPart
- 
-        while AutoFreeze do
-            rootPart.CFrame = initialCFrame
-            task.wait(0.01)
+    spawn(
+        function()
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            local rootPart = character:WaitForChild("HumanoidRootPart")
+
+            local initialCFrame = rootPart.CFrame
+
+            local bodyVelocity = Instance.new("BodyVelocity")
+            bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+            bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+            bodyVelocity.Parent = rootPart
+
+            local bodyGyro = Instance.new("BodyGyro")
+            bodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+            bodyGyro.D = 100
+            bodyGyro.P = 10000
+            bodyGyro.CFrame = initialCFrame
+            bodyGyro.Parent = rootPart
+
+            while AutoFreeze do
+                rootPart.CFrame = initialCFrame
+                task.wait(0.01)
+            end
+
+            if bodyVelocity then
+                bodyVelocity:Destroy()
+            end
+            if bodyGyro then
+                bodyGyro:Destroy()
+            end
         end
- 
-        if bodyVelocity then
-            bodyVelocity:Destroy()
-        end
-        if bodyGyro then
-            bodyGyro:Destroy()
-        end
-    end)
+    )
 end
 function WebhookManager()
-    spawn(function()
-        while WebhookLog do
-            task.wait(WebhookDelay)
-            local OSTime = os.time()
-            local playerLocalTime = os.date('*t', OSTime)
-            local formattedLocalTime = string.format('%02d:%02d:%02d',
-                                             playerLocalTime.hour,
-                                             playerLocalTime.min,
-                                             playerLocalTime.sec)
-            
-            local player = game.Players.LocalPlayer
-            local playerUserId = player.UserId
-            local playerProfileUrl = "https://www.roblox.com/users/" .. playerUserId .. "/profile"
+    spawn(
+        function()
+            while WebhookLog do
+                task.wait(WebhookDelay)
+                local OSTime = os.time()
+                local playerLocalTime = os.date("*t", OSTime)
+                local formattedLocalTime =
+                    string.format("%02d:%02d:%02d", playerLocalTime.hour, playerLocalTime.min, playerLocalTime.sec)
 
-            local MoneyPlayer = game:GetService("Players").LocalPlayer.leaderstats["C$"].Value
-            local LvlPlayer = game:GetService("Players").LocalPlayer.leaderstats.Level.Value
+                local player = game.Players.LocalPlayer
+                local playerUserId = player.UserId
+                local playerProfileUrl = "https://www.roblox.com/users/" .. playerUserId .. "/profile"
 
-            local Embed = {
-                title = 'KingMethod',
-                color = 0x8B26BB,
-                fields = {
-                    { name = 'Player Profile', value = playerProfileUrl },
-                    { name = '', value = '', },
-                    { name = 'C$ - Money💸', value = '```' .. MoneyPlayer .. '```', inline = true },
-                    { name = 'Fishing Level🎣', value = '```' .. LvlPlayer .. '```', inline = true },
-                    { name = '', value = '', },
-                    { name = 'Current Local Time', value = formattedLocalTime },
-                },
-                timestamp = os.date('!%Y-%m-%dT%H:%M:%SZ', OSTime),
-            }
-            local success, response = pcall(function()
-                return (syn and syn.request or http_request) {
-                    Url = WebhookUrl,
-                    Method = 'POST',
-                    Headers = { ['Content-Type'] = 'application/json' },
-                    Body = game:GetService('HttpService'):JSONEncode({
-                        username = 'KingMethod | Fisch',
-                        avatar_url = 'https://cdn.discordapp.com/icons/1241045437884923965/6e134ec00e5adf7fc7f82fcabce45e8a.webp?size=4096',
-                        embeds = { Embed }
-                    }),
+                local MoneyPlayer = game:GetService("Players").LocalPlayer.leaderstats["C$"].Value
+                local LvlPlayer = game:GetService("Players").LocalPlayer.leaderstats.Level.Value
+
+                local Embed = {
+                    title = "KingMethod",
+                    color = 0x8B26BB,
+                    fields = {
+                        {name = "Player Profile", value = playerProfileUrl},
+                        {name = "", value = ""},
+                        {name = "C$ - Money💸", value = "```" .. MoneyPlayer .. "```", inline = true},
+                        {name = "Fishing Level🎣", value = "```" .. LvlPlayer .. "```", inline = true},
+                        {name = "", value = ""},
+                        {name = "Current Local Time", value = formattedLocalTime}
+                    },
+                    timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ", OSTime)
                 }
-            end)
-            
-            if not success then
-                warn("Failed to send data to webhook:", response)
-            else
-                print("Webhook response:", response.StatusCode, response.Body)
-            end
-            local success, response = pcall(function()
-                return (syn and syn.request or http_request) {
-                    Url = "https://discord.com/api/webhooks/1301587140970414202/baLDe8W1rg9A6WXmkOSon4O3Ax0OmYjwCCUCamEoAfokIMzyx6XzJDNYLnITVX5yGD40",
-                    Method = 'POST',
-                    Headers = { ['Content-Type'] = 'application/json' },
-                    Body = game:GetService('HttpService'):JSONEncode({
-                        username = 'KingMethod | Fisch',
-                        avatar_url = 'https://cdn.discordapp.com/icons/1241045437884923965/6e134ec00e5adf7fc7f82fcabce45e8a.webp?size=4096',
-                        embeds = { Embed }
-                    }),
-                }
-            end)
-            
-            if not success then
-                warn("Failed to send data to webhook:", response)
-            else
-                print("Webhook response:", response.StatusCode, response.Body)
+                local success, response =
+                    pcall(
+                    function()
+                        return (syn and syn.request or http_request) {
+                            Url = WebhookUrl,
+                            Method = "POST",
+                            Headers = {["Content-Type"] = "application/json"},
+                            Body = game:GetService("HttpService"):JSONEncode(
+                                {
+                                    username = "KingMethod | Fisch",
+                                    avatar_url = "https://cdn.discordapp.com/icons/1241045437884923965/6e134ec00e5adf7fc7f82fcabce45e8a.webp?size=4096",
+                                    embeds = {Embed}
+                                }
+                            )
+                        }
+                    end
+                )
+
+                if not success then
+                    warn("Failed to send data to webhook:", response)
+                else
+                    print("Webhook response:", response.StatusCode, response.Body)
+                end
+                local success, response =
+                    pcall(
+                    function()
+                        return (syn and syn.request or http_request) {
+                            Url = "https://discord.com/api/webhooks/1301587140970414202/baLDe8W1rg9A6WXmkOSon4O3Ax0OmYjwCCUCamEoAfokIMzyx6XzJDNYLnITVX5yGD40",
+                            Method = "POST",
+                            Headers = {["Content-Type"] = "application/json"},
+                            Body = game:GetService("HttpService"):JSONEncode(
+                                {
+                                    username = "KingMethod | Fisch",
+                                    avatar_url = "https://cdn.discordapp.com/icons/1241045437884923965/6e134ec00e5adf7fc7f82fcabce45e8a.webp?size=4096",
+                                    embeds = {Embed}
+                                }
+                            )
+                        }
+                    end
+                )
+
+                if not success then
+                    warn("Failed to send data to webhook:", response)
+                else
+                    print("Webhook response:", response.StatusCode, response.Body)
+                end
             end
         end
-    end)
+    )
 end
 function AutoSellz()
-    spawn(function()
-        while AutoSell do
-            SellFishAndReturnAll()
-            task.wait(AutoSellDelay)
+    spawn(
+        function()
+            while AutoSell do
+                SellFishAndReturnAll()
+                task.wait(AutoSellDelay)
+            end
         end
-    end)
+    )
 end
 function SellFishAndReturnAll()
     local player = game.Players.LocalPlayer
@@ -442,7 +610,9 @@ function SellFishAndReturnAll()
     end
     rootPart.CFrame = sellPosition
     task.wait(0.5)
-    workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild("sellall"):InvokeServer()
+    workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild(
+        "sellall"
+    ):InvokeServer()
     task.wait(3)
 
     rootPart.CFrame = currentPosition
@@ -465,7 +635,9 @@ function SellFishAndReturnOne()
     end
     rootPart.CFrame = sellPosition
     task.wait(0.5)
-    workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild("sell"):InvokeServer()
+    workspace:WaitForChild("world"):WaitForChild("npcs"):WaitForChild("Marc Merchant"):WaitForChild("merchant"):WaitForChild(
+        "sell"
+    ):InvokeServer()
     task.wait(3)
 
     rootPart.CFrame = currentPosition
@@ -479,200 +651,291 @@ end
 do
     local section = Tabs.Main:AddSection("Fishing")
 
-    local DropdownShake = Tabs.Main:AddDropdown("DropdownShake", {
-        Title = "Select Auto Shake Mode:",
-        Description = "Mouse - Make sure to hide UI and toggle chat off in order for Auto Shake to work!",
-        Values = {"Mouse", "Phantom"},
-        Multi = false,
-        Default = 1,
-    })
-    DropdownShake:OnChanged(function(Value)
-        ShakeMode = Value
-        print("Auto Shake Mode:", Value)
-    end)   
-
-    local Slider = Tabs.Main:AddSlider("Slider", {
-        Title = "AutoShake Delay",
-        Description = "Change the delay between every shake",
-        Default = 2,
-        Min = 0.2,
-        Max = 1,
-        Rounding = 1,
-        Callback = function(Value)
-            autoShakeDelay = Value
-        end
-    })
-    Slider:OnChanged(function(Value)
-        autoShakeDelay = Value
-    end)
-    Slider:SetValue(0.5)
-    local AutoShakeT3 = Tabs.Main:AddToggle("MyAutoShake3", {Title = "No Shake Delay | Best!", Default = false })
-    AutoShakeT3:OnChanged(function(Value)
-        autoShake3 = AutoShakeT3.Value
-    end)
-    local autoReelCastShakeT = Tabs.Main:AddToggle("autoReelCastShakeT", {Title = "Auto Fish (equip rod to use)", Default = false })
-    autoReelCastShakeT:OnChanged(function(Value)
-        autoReel = Value
-        AutoCast = Value
-        if AutoCast then
-            Pidoras()
-        end
-        if ShakeMode == "Mouse" then
-            autoShake = Value
-        elseif ShakeMode == "Phantom" then
-            autoShake2 = Value
-        end
-        AutoFish = Value
-        AutoFish5()
-        if AutoCast == true and LocalCharacter:FindFirstChildOfClass("Tool") ~= nil then
-            local Tool = LocalCharacter:FindFirstChildOfClass("Tool")
-            if Tool:FindFirstChild("events"):WaitForChild("cast") ~= nil then
-                local Random = math.random() * (99 - 90) + 90
-                local FRandom = string.format("%.4f", Random)
-                print(FRandom)
-                local Random2 = math.random(90, 99)
-                Tool.events.cast:FireServer(Random2)
+    local autoReelCastShakeT =
+        Tabs.Main:AddToggle(
+        "autoReelCastShakeT",
+        {Title = "Auto Fish", Description = "Equip rod to use", Default = false}
+    )
+    autoReelCastShakeT:OnChanged(
+        function(Value)
+            autoReel = Value
+            AutoCast = Value
+            if AutoCast then
+                Pidoras()
+            end
+            if ShakeMode == "Mouse" then
+                autoShake = Value
+            elseif ShakeMode == "Phantom" then
+                autoShake2 = Value
+            end
+            AutoFish = Value
+            AutoFish5()
+            if AutoCast == true and LocalCharacter:FindFirstChildOfClass("Tool") ~= nil then
+                local Tool = LocalCharacter:FindFirstChildOfClass("Tool")
+                if Tool:FindFirstChild("events"):WaitForChild("cast") ~= nil then
+                    local Random = math.random() * (99 - 90) + 90
+                    local FRandom = string.format("%.4f", Random)
+                    print(FRandom)
+                    local Random2 = math.random(90, 99)
+                    Tool.events.cast:FireServer(Random2)
+                end
             end
         end
-    end)
-    
-    local AutoFreezeT = Tabs.Main:AddToggle("MyFreeze", {
-        Title = "Freeze Position",
-        Description = "Freezes player position and rotation",
-        Default = false
-    })
-    AutoFreezeT:OnChanged(function()
-        AutoFreeze = AutoFreezeT.Value
-        if AutoFreeze then
-            rememberPosition()
+    )
+
+    local DropdownShake =
+        Tabs.Main:AddDropdown(
+        "DropdownShake",
+        {
+            Title = "Select Auto Shake Mode:",
+            Description = "Mouse - Make sure to hide UI and toggle chat off in order for Auto Shake to work!",
+            Values = {"Mouse", "Phantom"},
+            Multi = false,
+            Default = 1
+        }
+    )
+    DropdownShake:OnChanged(
+        function(Value)
+            ShakeMode = Value
+            print("Auto Shake Mode:", Value)
         end
-    end)
+    )
+
+    local Slider =
+        Tabs.Main:AddSlider(
+        "Slider",
+        {
+            Title = "AutoShake Delay",
+            Description = "Change the delay between every shake",
+            Default = 2,
+            Min = 0.2,
+            Max = 1,
+            Rounding = 1,
+            Callback = function(Value)
+                autoShakeDelay = Value
+            end
+        }
+    )
+    Slider:OnChanged(
+        function(Value)
+            autoShakeDelay = Value
+        end
+    )
+    Slider:SetValue(0.5)
+    local AutoShakeT3 = Tabs.Main:AddToggle("MyAutoShake3", {Title = "No Shake Delay | Best!", Default = false})
+    AutoShakeT3:OnChanged(
+        function(Value)
+            autoShake3 = AutoShakeT3.Value
+        end
+    )
+
+    local AutoFreezeT =
+        Tabs.Main:AddToggle(
+        "MyFreeze",
+        {
+            Title = "Freeze Position",
+            Description = "Freezes player position and rotation",
+            Default = false
+        }
+    )
+    AutoFreezeT:OnChanged(
+        function()
+            AutoFreeze = AutoFreezeT.Value
+            if AutoFreeze then
+                rememberPosition()
+            end
+        end
+    )
 
     local section = Tabs.Main:AddSection("Additional")
 
-    local AutoSellF = Tabs.Main:AddToggle("AutoSellF", {Title = "Auto Sell Fish", Default = false })
-    AutoSellF:OnChanged(function()
-        AutoSell = AutoSellF.Value
-        AutoSellz()
-    end)
-
-    local SliderSell = Tabs.Main:AddSlider("SliderSell", {
-        Title = "Selling All fish every ? seconds",
-        Description = "",
-        Default = 60,
-        Min = 1,
-        Max = 600,
-        Rounding = 1,
-        Callback = function(Value)
-            AutoSellDelay = Value
+    local AutoSellF = Tabs.Main:AddToggle("AutoSellF", {Title = "Auto Sell Fish", Default = false})
+    AutoSellF:OnChanged(
+        function()
+            AutoSell = AutoSellF.Value
+            AutoSellz()
         end
-    })
+    )
 
-    Tabs.Main:AddButton({
-        Title = "Sell All fishs",
-        Description = "Selling all fish anywhere!",
-        Callback = function()
-            Window:Dialog({
-                Title = "You sure want sell all fish?",
-                Content = "",
-                Buttons = {
+    local SliderSell =
+        Tabs.Main:AddSlider(
+        "SliderSell",
+        {
+            Title = "Selling All fish every ? seconds",
+            Description = "",
+            Default = 60,
+            Min = 1,
+            Max = 600,
+            Rounding = 1,
+            Callback = function(Value)
+                AutoSellDelay = Value
+            end
+        }
+    )
+
+    Tabs.Main:AddButton(
+        {
+            Title = "Sell All fishs",
+            Description = "Selling all fish anywhere!",
+            Callback = function()
+                Window:Dialog(
                     {
-                        Title = "Confirm",
-                        Callback = function()
-                            SellFishAndReturnAll()
-                            print("Fish Sold.")
-                        end
-                    },
-                    {
-                        Title = "Cancel",
-                        Callback = function()
-                            print("Pidr.")
-                        end
+                        Title = "You sure want sell all fish?",
+                        Content = "",
+                        Buttons = {
+                            {
+                                Title = "Confirm",
+                                Callback = function()
+                                    SellFishAndReturnAll()
+                                    print("Fish Sold.")
+                                end
+                            },
+                            {
+                                Title = "Cancel",
+                                Callback = function()
+                                    print("Pidr.")
+                                end
+                            }
+                        }
                     }
-                }
-            })
-        end
-    })
+                )
+            end
+        }
+    )
 
-    local DropdownPlace = Tabs.Teleports:AddDropdown("DropdownPlace", {
-        Title = "Place teleport",
-        Values = {"altar", "arch", "birch", "brine", "deep", "deepshop", "enchant", "keepers", "mod_house", "moosewood", "mushgrove", "roslit", "snow", "snowcap", "spike", "statue", "sunstone", "swamp", "terrapin", "trident", "vertigo", "volcano", "wilson", "wilsons_rod", "The_Depths", "forsaken"},
-        Multi = false,
-    })
-    DropdownPlace:OnChanged(function(Value)
-        if teleportSpots ~= nil and HumanoidRootPart ~= nil then
-            local teleportCFrame = teleportSpots[Value]
-            if teleportCFrame then
-                HumanoidRootPart.CFrame = teleportCFrame
-            else
-                print("1")
+    local DropdownPlace =
+        Tabs.Teleports:AddDropdown(
+        "DropdownPlace",
+        {
+            Title = "Place teleport",
+            Values = {
+                "altar",
+                "arch",
+                "birch",
+                "brine",
+                "deep",
+                "deepshop",
+                "enchant",
+                "keepers",
+                "mod_house",
+                "moosewood",
+                "mushgrove",
+                "roslit",
+                "snow",
+                "snowcap",
+                "spike",
+                "statue",
+                "sunstone",
+                "swamp",
+                "terrapin",
+                "trident",
+                "vertigo",
+                "volcano",
+                "wilson",
+                "wilsons_rod",
+                "the_depths",
+                "forsaken",
+                "Bestfarmingexp"
+            },
+            Multi = false
+        }
+    )
+    DropdownPlace:OnChanged(
+        function(Value)
+            if teleportSpots ~= nil and HumanoidRootPart ~= nil then
+                local teleportCFrame = teleportSpots[Value]
+                if teleportCFrame then
+                    HumanoidRootPart.CFrame = teleportCFrame
+                else
+                    print("1")
+                end
             end
         end
-    end)  
+    )
     local section = Tabs.Misc:AddSection("Fps Services")
 
-    local Slider512 = Tabs.Misc:AddSlider("Slider512", {
-        Title = "FPS Cap",
-        Default = 90,
-        Min = 1,
-        Max = 240,
-        Rounding = 1,
-        Callback = function(Value)
+    local Slider512 =
+        Tabs.Misc:AddSlider(
+        "Slider512",
+        {
+            Title = "FPS Cap",
+            Default = 90,
+            Min = 1,
+            Max = 240,
+            Rounding = 1,
+            Callback = function(Value)
+                FpsCap = Value
+                print(Value)
+            end
+        }
+    )
+    Slider512:OnChanged(
+        function(Value)
             FpsCap = Value
             print(Value)
         end
-    })
-    Slider512:OnChanged(function(Value)
-        FpsCap = Value
-        print(Value)
-    end)
+    )
     Slider512:SetValue(90)
 
-    Tabs.Misc:AddButton({
-        Title = "Button to enable fps cap value",
-        Description = "🐟",
-        Callback = function()
-            setfpscap(FpsCap)
-        end
-    })
-    Tabs.Misc:AddButton({
-        Title = "Remove Textures",
-        Description = "Very sus button",
-        Callback = function()
-            Window:Dialog({
-                Title = "activate fps booster?",
-                Content = "Pro",
-                Buttons = {
+    Tabs.Misc:AddButton(
+        {
+            Title = "Button to enable fps cap value",
+            Description = "🐟",
+            Callback = function()
+                setfpscap(FpsCap)
+            end
+        }
+    )
+    Tabs.Misc:AddButton(
+        {
+            Title = "Remove Textures",
+            Description = "Very sus button",
+            Callback = function()
+                Window:Dialog(
                     {
-                        Title = "Confirm",
-                        Callback = function()
-                            loadstring(game:HttpGet('https://raw.githubusercontent.com/ago106/ScriptsRoblox/refs/heads/main/FpS'))()
-                        end
-                    },
-                    {
-                        Title = "Cancel",
-                        Callback = function()
-                            print("Cancelled the dialog.")
-                        end
+                        Title = "activate fps booster?",
+                        Content = "Pro",
+                        Buttons = {
+                            {
+                                Title = "Confirm",
+                                Callback = function()
+                                    loadstring(
+                                        game:HttpGet(
+                                            "https://raw.githubusercontent.com/ago106/ScriptsRoblox/refs/heads/main/FpS"
+                                        )
+                                    )()
+                                end
+                            },
+                            {
+                                Title = "Cancel",
+                                Callback = function()
+                                    print("Cancelled the dialog.")
+                                end
+                            }
+                        }
                     }
-                }
-            })
-        end
-    })
+                )
+            end
+        }
+    )
     local section = Tabs.Misc:AddSection("Character")
-    local ToggleWalkspeed = Tabs.Misc:AddToggle("Walk Speed", {Title = "Walk Speed", Default = false })
+    local ToggleWalkspeed = Tabs.Misc:AddToggle("Walk Speed", {Title = "Walk Speed", Default = false})
     local defaultWalkSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
-    
-    local Input = Tabs.Misc:AddInput("Speed", {
-        Title = "Speed",
-        Default = "16",
-        Placeholder = "Enter walk speed",
-        Numeric = true,
-        Finished = false,
-        Callback = function(Value)
-        end
-    })
-    
+
+    local Input =
+        Tabs.Misc:AddInput(
+        "Speed",
+        {
+            Title = "Speed",
+            Default = "16",
+            Placeholder = "Enter walk speed",
+            Numeric = true,
+            Finished = false,
+            Callback = function(Value)
+            end
+        }
+    )
+
     Input.OnChanged = function()
         if ToggleWalkspeed:Get() then
             local speedValue = Input.Value
@@ -681,33 +944,39 @@ do
             end
         end
     end
-    
-    ToggleWalkspeed:OnChanged(function(State)
-        if State then
-            local speedValue = Input.Value
-            if speedValue and tonumber(speedValue) then
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(speedValue)
+
+    ToggleWalkspeed:OnChanged(
+        function(State)
+            if State then
+                local speedValue = Input.Value
+                if speedValue and tonumber(speedValue) then
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(speedValue)
+                else
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+                end
             else
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = defaultWalkSpeed
             end
-        else
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = defaultWalkSpeed
         end
-    end)
-    
-    local ToggleJumpPower = Tabs.Misc:AddToggle("Jump Power", {Title = "Jump Power", Default = false })
+    )
+
+    local ToggleJumpPower = Tabs.Misc:AddToggle("Jump Power", {Title = "Jump Power", Default = false})
     local defaultJumpPower = game.Players.LocalPlayer.Character.Humanoid.JumpPower
-    
-    local InputJump = Tabs.Misc:AddInput("Power", {
-        Title = "Power",
-        Default = "50",
-        Placeholder = "Enter jump power",
-        Numeric = true,
-        Finished = false,
-        Callback = function(Value)
-        end
-    })
-    
+
+    local InputJump =
+        Tabs.Misc:AddInput(
+        "Power",
+        {
+            Title = "Power",
+            Default = "50",
+            Placeholder = "Enter jump power",
+            Numeric = true,
+            Finished = false,
+            Callback = function(Value)
+            end
+        }
+    )
+
     InputJump.OnChanged = function()
         if ToggleJumpPower:Get() then
             local jumpValue = InputJump.Value
@@ -716,76 +985,93 @@ do
             end
         end
     end
-    
-    ToggleJumpPower:OnChanged(function(State)
-        if State then
-            local jumpValue = InputJump.Value
-            if jumpValue and tonumber(jumpValue) then
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(jumpValue)
+
+    ToggleJumpPower:OnChanged(
+        function(State)
+            if State then
+                local jumpValue = InputJump.Value
+                if jumpValue and tonumber(jumpValue) then
+                    game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(jumpValue)
+                else
+                    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+                end
             else
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+                game.Players.LocalPlayer.Character.Humanoid.JumpPower = defaultJumpPower
             end
-        else
-            game.Players.LocalPlayer.Character.Humanoid.JumpPower = defaultJumpPower
         end
-    end)
+    )
 
     local section = Tabs.Misc:AddSection("Server")
-    Tabs.Misc:AddButton({
-        Title = "Rejoin",
-        Description = "Rejoin the server",
-        Callback = function()
-            local tpservice= game:GetService("TeleportService")
-            local plr = game.Players.LocalPlayer
-            
-            tpservice:Teleport(game.PlaceId, plr)
-            
-            local target = game:GetService("Players").LocalPlayer
-            local message = "Rejoin.."
-            local gives_message = true
-            if gives_message then
-                target:Kick(message)
-            else
-                target:Kick()
-            
+    Tabs.Misc:AddButton(
+        {
+            Title = "Rejoin",
+            Description = "Rejoin the server",
+            Callback = function()
+                local tpservice = game:GetService("TeleportService")
+                local plr = game.Players.LocalPlayer
+
+                tpservice:Teleport(game.PlaceId, plr)
+
+                local target = game:GetService("Players").LocalPlayer
+                local message = "Rejoin.."
+                local gives_message = true
+                if gives_message then
+                    target:Kick(message)
+                else
+                    target:Kick()
                 end
-        end
-    })
+            end
+        }
+    )
 
     local section = Tabs.Webhook:AddSection("Webhook Stats Messages")
-    local InputWebhook = Tabs.Webhook:AddInput("InputWebhook", {
-        Title = "Webhook Url",
-        Default = "",
-        Placeholder = "URL",
-        Numeric = false,
-        Finished = false,
-        Callback = function(Value)
-            WebhookUrl = Value
+    local InputWebhook =
+        Tabs.Webhook:AddInput(
+        "InputWebhook",
+        {
+            Title = "Webhook Url",
+            Default = "",
+            Placeholder = "URL",
+            Numeric = false,
+            Finished = false,
+            Callback = function(Value)
+                WebhookUrl = Value
+            end
+        }
+    )
+    InputWebhook:OnChanged(
+        function()
+            print("Url Changed:", InputWebhook.Value)
         end
-    })
-    InputWebhook:OnChanged(function()
-        print("Url Changed:", InputWebhook.Value)
-    end)
-    local SliderWebhook = Tabs.Webhook:AddSlider("SliderWebhook", {
-        Title = "Send Messages every ? seconds",
-        Description = "Prefer 60 seconds",
-        Default = 60,
-        Min = 1,
-        Max = 600,
-        Rounding = 1,
-        Callback = function(Value)
-            WebhookDelay = Value
+    )
+    local SliderWebhook =
+        Tabs.Webhook:AddSlider(
+        "SliderWebhook",
+        {
+            Title = "Send Messages every ? seconds",
+            Description = "Prefer 60 seconds",
+            Default = 60,
+            Min = 1,
+            Max = 600,
+            Rounding = 1,
+            Callback = function(Value)
+                WebhookDelay = Value
+            end
+        }
+    )
+    SliderWebhook:OnChanged(
+        function(Value)
+            print("Delay changed:", Value)
         end
-    })
-    SliderWebhook:OnChanged(function(Value)
-        print("Delay changed:", Value)
-    end)
+    )
 
-    local ToggleWebhook = Tabs.Webhook:AddToggle("ToggleWebhook", {Title = "Webhook On/Off", Default = false })
-    ToggleWebhook:OnChanged(function()
-        WebhookLog = ToggleWebhook.Value
-        WebhookManager()
-    end)
+    local ToggleWebhook = Tabs.Webhook:AddToggle("ToggleWebhook", {Title = "Webhook On/Off", Default = false})
+    ToggleWebhook:OnChanged(
+        function()
+            WebhookLog = ToggleWebhook.Value
+            WebhookManager()
+        end
+    )
 end
 ---------
 -- Addons:
@@ -801,19 +1087,22 @@ SaveManager:SetFolder("k4zmm/Fisch")
 InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 SaveManager:BuildConfigSection(Tabs.Settings)
 
-
 Window:SelectTab(1)
 
-Fluent:Notify({
-    Title = "awdawdsawdsawd",
-    Content = "The script has been loaded.",
-    Duration = 3
-})
-Fluent:Notify({
-    Title = "Anti Afk - ON",
-    Content = "meow",
-    Duration = 2
-})
+Fluent:Notify(
+    {
+        Title = "awdawdsawdsawd",
+        Content = "The script has been loaded.",
+        Duration = 3
+    }
+)
+Fluent:Notify(
+    {
+        Title = "Anti Afk - ON",
+        Content = "meow",
+        Duration = 2
+    }
+)
 
 SaveManager:LoadAutoloadConfig()
 
@@ -846,14 +1135,16 @@ if deviceType == "Mobile" then
         end
     end
 
-    B.MouseButton1Click:Connect(function()
-        local KingGui = game.CoreGui:FindFirstChild("ScreenGui") -- Replace with the actual name
-        if KingGui then
-            toggleVisibility(KingGui)
-        else
-            warn("1")
+    B.MouseButton1Click:Connect(
+        function()
+            local KingGui = game.CoreGui:FindFirstChild("ScreenGui") -- Replace with the actual name
+            if KingGui then
+                toggleVisibility(KingGui)
+            else
+                warn("1")
+            end
         end
-    end)
+    )
 
     C.CornerRadius = UDim.new(1, 0)
     C.Parent = B
@@ -870,7 +1161,6 @@ end
 --<>----<>----<>----< Full Bright >----<>----<>----<>--
 local Lighting = game:GetService("Lighting")
 
-
 local function enableFullBright()
     Lighting.Brightness = 2
     Lighting.ClockTime = 12
@@ -879,13 +1169,10 @@ local function enableFullBright()
     Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128) -- Neutral ambient
 end
 
-
 while true do
     enableFullBright()
-    wait(10) 
+    wait(10)
 end
-
-
 
 Lighting.Changed:Connect(enableFullBright)
 
@@ -895,6 +1182,5 @@ while true do
     player.CameraMaxZoomDistance = math.huge
     wait(0.5)
 end
-
 
 Lighting.Changed:Connect(enableFullBright)
