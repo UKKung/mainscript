@@ -16,7 +16,7 @@ _G.Mode = _G.Mode or 'Normal' -- Default mode is 'Normal'
 local supportedGames = {
     ["Normal"] = {
         [16732694052] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/fisch.lua", -- Game ID: 4442272183
-        [1234567890] = "https://example.com/normal_script_1.lua", -- Game ID: 1234567890
+        [17450551531] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua", -- Game ID: 1234567890
         [9876543210] = "https://example.com/normal_script_2.lua" -- Game ID: 9876543210
     },
     ["AnotherMode"] = {
