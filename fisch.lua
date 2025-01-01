@@ -1067,7 +1067,7 @@ SaveManager:LoadAutoloadConfig()
 
 local deviceType = game:GetService("UserInputService").TouchEnabled and "Mobile" or "PC"
 
-if deviceType == "Mobile" then
+if deviceType == "Mobile" or deviceType == "PC" then
     local A = Instance.new("ScreenGui")
     local B = Instance.new("TextButton")
     local C = Instance.new("UICorner")
@@ -1077,37 +1077,35 @@ if deviceType == "Mobile" then
     A.ResetOnSpawn = false
 
     B.Size = UDim2.new(0, 50, 0, 50)
-    B.Position = UDim2.new(0, 10, 1, -60) -- Consider making this responsive
+    B.Position = UDim2.new(0, 10, 1, -60) -- Adjusted to fit better on screens
     B.BackgroundColor3 = Color3.fromRGB(128, 0, 128)
     B.Text = "S"
-    B.TextColor3 = Color3.fromRGB(0, 0, 0)
+    B.TextColor3 = Color3.fromRGB(255, 255, 255) -- Better text visibility
     B.TextScaled = true
-    B.Transparency = 0.5
+    B.BackgroundTransparency = 0.5 -- Corrected property name
     B.Parent = A
 
     local function toggleVisibility(frame)
         for _, child in ipairs(frame:GetChildren()) do
-            if child:IsA("Frame") then
+            if child:IsA("GuiObject") then
                 child.Visible = not child.Visible
-                toggleVisibility(child)
             end
         end
     end
 
-    B.MouseButton1Click:Connect(
-        function()
-            local KingGui = game.CoreGui:FindFirstChild("ScreenGui") -- Replace with the actual name
-            if KingGui then
-                toggleVisibility(KingGui)
-            else
-                warn("1")
-            end
+    B.MouseButton1Click:Connect(function()
+        local KingGui = game.CoreGui:FindFirstChild("KingToggle") -- Corrected name
+        if KingGui then
+            toggleVisibility(KingGui)
+        else
+            warn("KingToggle GUI not found!")
         end
-    )
+    end)
 
     C.CornerRadius = UDim.new(1, 0)
     C.Parent = B
 end
+
 
 --<>----<>----<>----< inf zoom >----<>----<>----<>--
 local player = game.Players.LocalPlayer
