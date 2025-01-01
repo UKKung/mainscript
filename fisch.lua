@@ -48,7 +48,7 @@ local InterfaceManager =
 local Window =
     Fluent:CreateWindow(
     {
-        Title = "Fisch | 0.3.2",
+        Title = "Fisch | 0.3",
         SubTitle = "by k4zmm_",
         TabWidth = 160,
         Size = UDim2.fromOffset(580, 460),
