@@ -1,4 +1,3 @@
-local versions = "0.3"
 --<>----<>----<>----< Getting Services >----<>----<>----<>--
 AnalyticsService = game:GetService("AnalyticsService")
 CollectionService = game:GetService("CollectionService")
@@ -49,7 +48,7 @@ local InterfaceManager =
 local Window =
     Fluent:CreateWindow(
     {
-        Title = "awdawdsawdsawd " .. versions,
+        Title = "Fisch | 0.3",
         SubTitle = "by k4zmm_",
         TabWidth = 160,
         Size = UDim2.fromOffset(580, 460),
