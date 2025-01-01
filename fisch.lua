@@ -384,41 +384,35 @@ function AntiAfk2()
     )
 end
 function Pidoras()
-    spawn(
-        function()
-            while AutoCast do
-                local player = game.Players.LocalPlayer
-                local character = player.Character
+    spawn(function()
+        while AutoCast do
+            local player = game.Players.LocalPlayer
+            local character = player.Character
 
-                if character then
-                    local tool = character:FindFirstChildOfClass("Tool")
+            if character then
+                local tool = character:FindFirstChildOfClass("Tool")
 
-                    if tool then
-                        local hasBobber = tool:FindFirstChild("bobber")
+                if tool and not tool:FindFirstChild("bobber") then
+                    local castEvent = tool:FindFirstChild("events") and tool.events:FindFirstChild("cast")
 
-                        if not hasBobber then
-                            local castEvent = tool:FindFirstChild("events") and tool.events:FindFirstChild("cast")
+                    if castEvent then
+                        local randomValue = math.random(90, 99) + math.random() -- Creates a value between 90 and 99.9999
+                        local formattedValue = string.format("%.4f", randomValue)
+                        print(formattedValue)
 
-                            if castEvent then
-                                local Random = math.random() * (99 - 90) + 90
-                                local FRandom = string.format("%.4f", Random)
-                                print(FRandom)
+                        castEvent:FireServer(math.floor(randomValue))
 
-                                local Random2 = math.random(90, 99)
-                                castEvent:FireServer(Random2)
-
-                                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-                                if humanoidRootPart then
-                                    humanoidRootPart.Anchored = false
-                                end
-                            end
+                        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                        if humanoidRootPart then
+                            humanoidRootPart.Anchored = false
                         end
                     end
-                    task.wait(1)
                 end
             end
+
+            task.wait(1)
         end
-    )
+    end)
 end
 NoclipConnection =
     RunService.Stepped:Connect(
