@@ -48,7 +48,7 @@ local InterfaceManager =
 local Window =
     Fluent:CreateWindow(
     {
-        Title = "Fisch | 0.3.1",
+        Title = "Fisch | 0.3.2",
         SubTitle = "by k4zmm_",
         TabWidth = 160,
         Size = UDim2.fromOffset(580, 460),
@@ -1094,7 +1094,7 @@ if deviceType == "Mobile" or deviceType == "PC" then
     end
 
     B.MouseButton1Click:Connect(function()
-        local KingGui = game.CoreGui:FindFirstChild("KingToggle") -- Corrected name
+        local KingGui = game.CoreGui:FindFirstChild("ScreenGui") -- Corrected name
         if KingGui then
             toggleVisibility(KingGui)
         else
