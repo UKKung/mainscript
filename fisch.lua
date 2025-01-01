@@ -1067,7 +1067,7 @@ SaveManager:LoadAutoloadConfig()
 
 local deviceType = game:GetService("UserInputService").TouchEnabled and "Mobile" or "PC"
 
-if deviceType == "Mobile" or deviceType == "PC" then
+--[[if deviceType == "Mobile" or deviceType == "PC" then
     local A = Instance.new("ScreenGui")
     local B = Instance.new("TextButton")
     local C = Instance.new("UICorner")
@@ -1104,7 +1104,7 @@ if deviceType == "Mobile" or deviceType == "PC" then
 
     C.CornerRadius = UDim.new(1, 0)
     C.Parent = B
-end
+end]]
 
 
 --<>----<>----<>----< inf zoom >----<>----<>----<>--
