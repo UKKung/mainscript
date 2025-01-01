@@ -655,7 +655,7 @@ do
             Description = "Mouse - Make sure to hide UI and toggle chat off in order for Auto Shake to work!",
             Values = {"Mouse", "Phantom"},
             Multi = false,
-            Default = 1
+            Default = 2
         }
     )
     DropdownShake:OnChanged(
