@@ -323,92 +323,56 @@ PlayerGUI.ChildAdded:Connect(
     end
 )
 function AutoFish5()
-    if autoShake3 then
-        task.spawn(
-            function()
-                while AutoFish do
-                    local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-                    local shakeUI = PlayerGUI:FindFirstChild("shakeui")
-                    if shakeUI and shakeUI.Enabled then
-                        local safezone = shakeUI:FindFirstChild("safezone")
-                        if safezone then
-                            local button = safezone:FindFirstChild("button")
-                            if button and button:IsA("ImageButton") and button.Visible then
-                                if autoShake then
-                                    local pos = button.AbsolutePosition
-                                    local size = button.AbsoluteSize
-                                    VirtualInputManager:SendMouseButtonEvent(
-                                        pos.X + size.X / 2,
-                                        pos.Y + size.Y / 2,
-                                        0,
-                                        true,
-                                        game:GetService("Players").LocalPlayer,
-                                        0
-                                    )
-                                    VirtualInputManager:SendMouseButtonEvent(
-                                        pos.X + size.X / 2,
-                                        pos.Y + size.Y / 2,
-                                        0,
-                                        false,
-                                        game:GetService("Players").LocalPlayer,
-                                        0
-                                    )
-                                elseif autoShake2 then
-                                    GuiService.SelectedObject = button
-                                    VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
-                                    VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
-                                end
-                            end
-                        end
-                    end
-                    task.wait()
-                end
-            end
-        )
-    else
-        task.spawn(
-            function()
-                while AutoFish do
-                    task.wait(autoShakeDelay)
-                    local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
-                    local shakeUI = PlayerGUI:FindFirstChild("shakeui")
-                    if shakeUI and shakeUI.Enabled then
-                        local safezone = shakeUI:FindFirstChild("safezone")
-                        if safezone then
-                            local button = safezone:FindFirstChild("button")
-                            if button and button:IsA("ImageButton") and button.Visible then
-                                if autoShake then
-                                    local pos = button.AbsolutePosition
-                                    local size = button.AbsoluteSize
-                                    VirtualInputManager:SendMouseButtonEvent(
-                                        pos.X + size.X / 2,
-                                        pos.Y + size.Y / 2,
-                                        0,
-                                        true,
-                                        game:GetService("Players").LocalPlayer,
-                                        0
-                                    )
-                                    VirtualInputManager:SendMouseButtonEvent(
-                                        pos.X + size.X / 2,
-                                        pos.Y + size.Y / 2,
-                                        0,
-                                        false,
-                                        game:GetService("Players").LocalPlayer,
-                                        0
-                                    )
-                                elseif autoShake2 then
-                                    GuiService.SelectedObject = button
-                                    VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
-                                    VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
-                                end
-                            end
-                        end
+    local function handleShakeUI()
+        local PlayerGUI = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+        local shakeUI = PlayerGUI:FindFirstChild("shakeui")
+        if shakeUI and shakeUI.Enabled then
+            local safezone = shakeUI:FindFirstChild("safezone")
+            if safezone then
+                local button = safezone:FindFirstChild("button")
+                if button and button:IsA("ImageButton") and button.Visible then
+                    if autoShake then
+                        local pos = button.AbsolutePosition
+                        local size = button.AbsoluteSize
+                        VirtualInputManager:SendMouseButtonEvent(
+                            pos.X + size.X / 2,
+                            pos.Y + size.Y / 2,
+                            0,
+                            true,
+                            game:GetService("Players").LocalPlayer,
+                            0
+                        )
+                        VirtualInputManager:SendMouseButtonEvent(
+                            pos.X + size.X / 2,
+                            pos.Y + size.Y / 2,
+                            0,
+                            false,
+                            game:GetService("Players").LocalPlayer,
+                            0
+                        )
+                    elseif autoShake2 then
+                        GuiService.SelectedObject = button
+                        VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+                        VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
                     end
                 end
             end
-        )
+        end
     end
+
+    task.spawn(function()
+        while AutoFish do
+            if autoShake3 then
+                handleShakeUI()
+                task.wait()
+            else
+                task.wait(autoShakeDelay)
+                handleShakeUI()
+            end
+        end
+    end)
 end
+
 function AntiAfk2()
     spawn(
         function()
