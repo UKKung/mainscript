@@ -285,6 +285,8 @@ local LocalCharacter = LocalPlayer.Character
 local HumanoidRootPart = LocalCharacter:FindFirstChild("HumanoidRootPart")
 local ActiveFolder = Workspace:FindFirstChild("active")
 local PlayerGUI = LocalPlayer:FindFirstChildOfClass("PlayerGui")
+--[[getgenv().TPPlace = "string"
+local TPPlace = getgenv().TPPlace]]
 
 -- Varbiables
 
@@ -811,6 +813,23 @@ do
             end
         end
     )
+    --[[Tabs.Teleports:AddButton(
+        {
+            Title = "Press to teleport",
+            Description = "🐟",
+            Callback = function()
+            if teleportSpots ~= nil and HumanoidRootPart ~= nil then
+                local teleportCFrame = teleportSpots[TPPlace]
+                if teleportCFrame then
+                    HumanoidRootPart.CFrame = teleportCFrame
+                else
+                    print("1")
+                end
+            end
+            end
+        }
+    )]]
+    
     local section = Tabs.Misc:AddSection("Fps Services")
 
     local Slider512 =
@@ -966,19 +985,8 @@ do
             Title = "Rejoin",
             Description = "Rejoin the server",
             Callback = function()
-                local tpservice = game:GetService("TeleportService")
-                local plr = game.Players.LocalPlayer
-
-                tpservice:Teleport(game.PlaceId, plr)
-
-                local target = game:GetService("Players").LocalPlayer
-                local message = "Rejoin.."
-                local gives_message = true
-                if gives_message then
-                    target:Kick(message)
-                else
-                    target:Kick()
-                end
+                game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+                game:GetService("Players").LocalPlayer:Kick("Rejoin..")
             end
         }
     )
