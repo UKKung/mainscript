@@ -6,6 +6,7 @@
 --]]
 
 -- Anti-AFK Prevention
+warn("Laoding Anti-AFK ...")
 local VirtualUser = game:GetService("VirtualUser")
 game.Players.LocalPlayer.Idled:Connect(function()
     VirtualUser:CaptureController()
@@ -44,6 +45,7 @@ local autoSetTreadmillEnabled = false
 local defaultWalkSpeed = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
 
 -- Functions
+warn("Loading Functions...")
 local function checkStamina()
     local staminaUI = game:GetService("StarterGui").Main.BottomCenter:FindFirstChild("Stamina")
     if staminaUI and tonumber(staminaUI.Text) <= 10 then
@@ -82,6 +84,7 @@ end
 
 warn("Load Functions Successfully!")
 -- UI Setup
+warn("Loading UI")
 Tabs.Main:AddToggle("Auto_Train", { Title = "Auto Train", Default = false }):OnChanged(function(state)
     autoTrainEnabled = state
     spawn(function()
@@ -149,3 +152,4 @@ Fluent:Notify({
 
 SaveManager:LoadAutoloadConfig()
 warn("Load UI Successfully!")
+print("Load Successfully!")
