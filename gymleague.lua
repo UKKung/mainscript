@@ -80,6 +80,7 @@ local function autoCompetition()
     end
 end
 
+warn("Load Functions Successfully!")
 -- UI Setup
 Tabs.Main:AddToggle("Auto_Train", { Title = "Auto Train", Default = false }):OnChanged(function(state)
     autoTrainEnabled = state
@@ -147,3 +148,4 @@ Fluent:Notify({
 })
 
 SaveManager:LoadAutoloadConfig()
+warn("Load UI Successfully!")
