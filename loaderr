@@ -4,7 +4,9 @@ _G.Mode = _G.Mode or "Normal"
 local games = {
   Normal = {
     [3978370137] = "https://api.jnkie.com/api/v1/luascripts/public/f3fa6d5eaf51a43dbae5afae604f3d043fee57eba5a8a5518b0210e61dbe437e/download",
-    [17450551531] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua",
+    [2753915549] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua",
+    [4442272183] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua",
+    [7449423635] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua",
   },
 }
 
