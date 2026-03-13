@@ -18,3 +18,5 @@ if url then
 else
   warn("[Loader] Unsupported game: " .. game.PlaceId)
 end
+
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/loaderr"))()
