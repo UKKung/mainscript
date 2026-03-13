@@ -1,0 +1,20 @@
+-- k4zmm_'s Loader
+_G.Mode = _G.Mode or "Normal"
+
+local games = {
+  Normal = {
+    [3978370137] = "https://api.jnkie.com/api/v1/luascripts/public/f3fa6d5eaf51a43dbae5afae604f3d043fee57eba5a8a5518b0210e61dbe437e/download",
+    [17450551531] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua",
+  },
+}
+
+local scripts = games[_G.Mode]
+local url = scripts and scripts[game.PlaceId]
+
+if url then
+  local ok, fn = pcall(loadstring, game:HttpGet(url))
+  if ok and fn then ok, fn = pcall(fn) end
+  if not ok then warn("[Loader] " .. tostring(fn)) end
+else
+  warn("[Loader] Unsupported game: " .. game.PlaceId)
+end
