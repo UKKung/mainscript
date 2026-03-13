@@ -17,7 +17,7 @@ local JNKIE   = "https://api.jnkie.com/api/v1/luascripts/public/f3fa6d5eaf51a43d
 
 local Scripts = {
 	Normal = buildMap {
-		[JNKIE]   = { 3978370137 },
+		[JNKIE]   = { 3978370137 , 1730877806 },
 		[QUANTUM] = { 2753915549, 4442272183, 7449423635 },
 	},
 }
