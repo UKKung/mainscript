@@ -12,7 +12,7 @@ local function buildMap(entries)
 	return result
 end
 
-local QUANTUM = "https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"
+local QUANTUM = "https://raw.githubusercontent.com/xQuartyx/QuartyzScript/main/Loader.lua"
 local JNKIE   = "https://api.jnkie.com/api/v1/luascripts/public/f3fa6d5eaf51a43dbae5afae604f3d043fee57eba5a8a5518b0210e61dbe437e/download"
 
 local Scripts = {
