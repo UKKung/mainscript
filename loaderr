@@ -1,24 +1,41 @@
 -- k4zmm_'s Loader
+
 _G.Mode = _G.Mode or "Normal"
 
-local games = {
-  Normal = {
-    [3978370137] = "https://api.jnkie.com/api/v1/luascripts/public/f3fa6d5eaf51a43dbae5afae604f3d043fee57eba5a8a5518b0210e61dbe437e/download",
-    [2753915549] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua",
-    [4442272183] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua",
-    [7449423635] = "https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/gymleague.lua",
-  },
+local function buildMap(entries)
+	local result = {}
+	for url, placeIds in pairs(entries) do
+		for _, id in ipairs(placeIds) do
+			result[id] = url
+		end
+	end
+	return result
+end
+
+local QUANTUM = "https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"
+local JNKIE   = "https://api.jnkie.com/api/v1/luascripts/public/f3fa6d5eaf51a43dbae5afae604f3d043fee57eba5a8a5518b0210e61dbe437e/download"
+
+local Scripts = {
+	Normal = buildMap {
+		[JNKIE]   = { 3978370137 },
+		[QUANTUM] = { 2753915549, 4442272183, 7449423635 },
+	},
 }
 
-local scripts = games[_G.Mode]
-local url = scripts and scripts[game.PlaceId]
+-- Execute
 
-if url then
-  local ok, fn = pcall(loadstring, game:HttpGet(url))
-  if ok and fn then ok, fn = pcall(fn) end
-  if not ok then warn("[Loader] " .. tostring(fn)) end
+local script = (Scripts[_G.Mode] or {})[game.PlaceId]
+
+if not script then
+	return warn(("[Loader] No script found for %d in mode '%s'"):format(game.PlaceId, _G.Mode))
+end
+
+local fn, err = loadstring(game:HttpGet(script))
+
+if fn then
+	fn()
 else
-  warn("[Loader] Unsupported game: " .. game.PlaceId)
+	warn(("[Loader] Failed to compile: %s"):format(err))
 end
 
 --loadstring(game:HttpGet("https://raw.githubusercontent.com/UKKung/mainscript/refs/heads/main/loaderr"))()
